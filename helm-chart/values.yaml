@@ -1,0 +1,136 @@
+nameOverride: "zea-opc-b03-kyc-swarnim"
+fullnameOverride: "zea-opc-b03-kyc-swarnim"
+clusterName: zea-opc-b03-kyc-swarnim
+
+hpa:
+  enabled: false
+
+replicaCount: 1
+
+#  maxReplicas: 3
+#  cpu: 65
+#  mem: false
+
+image:
+  repository: 813361731051.dkr.ecr.ap-south-1.amazonaws.com
+  repositoryPath: zea-opc-b03-kyc-swarnim
+  pullPolicy: Always
+  tag: 0.0.1-SNAPSHOT
+
+disablePropertiesConfigMap: true
+
+envProperties:
+  javaXms: 128M
+  javaXmx: 512M
+  APP_NAME: zea-opc-b03-kyc-swarnim
+  KINESIS_ACCESSKEY: vault:secrets/data/zone/common/logging#KINESIS_ACCESSKEY
+  KINESIS_SECRETKEY: vault:secrets/data/zone/common/logging#KINESIS_SECRETKEY
+  KINESIS_REGION: vault:secrets/data/zone/common/logging#KINESIS_REGION
+
+resources:
+  limits:
+    memory: 2Gi
+  requests:
+    cpu: 1
+    memory: 1Gi
+
+serviceAccountName: zea-opc-b03-kyc-swarnim
+
+service:
+  targetPort: 8080
+  port: 8080
+#  jolokiaPort: 8778
+  healthCheckPath: /health
+  livenessProbeInitialDelaySeconds: 90
+  readinessProbeInitialDelaySeconds: 90
+
+additionalPodAnnotations:
+  configmap.reloader.stakater.com/reload: "zea-opc-b03-kyc-swarnim-env-configmap"
+  health.check.enable: "true"
+  health.check.module: http_2xx
+  health.check.path: "/health"
+
+#envs:
+#  - name: environmentName
+#    value: staging
+
+
+serviceMonitor:
+  enabled: true
+
+volumeMounts: []
+
+olympusLabels:
+  olympusCluster: cluster
+  olympusClusterBU: bu
+  olympusClusterTeam: team-name
+  olympusZone: zone-name
+  olympusZoneEnv: zone-env
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+podSecurityContext: {}
+securityContext: {}
+volumes: {}
+
+
+#httpHealthCheckServiceMonitor:
+#  enabled: false
+
+
+
+
+#serviceMonitor:
+#  enabled: true
+#  monitors:
+#    - name: prometheus
+#      labels:
+#        prometheus: zone-monitoring
+#      path: /_metrics
+#      port: http
+#      scrapeTimeout: 10s
+#      interval: 30s
+#      matchLabels:
+#        app.kubernetes.io/name: zea-opc-b03-kyc-swarnim
+#        app: zea-opc-b03-kyc--swarnim
+#    - name: micrometer
+#      labels:
+#        prometheus: zone-monitoring
+#      path: /actuator/prometheus
+#      port: http
+#      scrapeTimeout: 10s
+#      interval: 60s
+#      matchLabels:
+#        app.kubernetes.io/name: zea-opc-b03-kyc-swarnim
+#        app: zea-opc-b03-kyc-swarnim
+
+#resources:
+#  limits:
+##    cpu: 100m
+#    memory: 128Mi
+#  requests:
+##    cpu: 100m
+#    memory: 128Mi
+
+
+
+#volumeMounts: []
+#
+#nodeSelector: {}
+#tolerations: []
+#affinity: {}
+#podSecurityContext: {}
+#securityContext: {}
+#volumes: {}
+#
+##priorityClassName: zea-opc-b03-kyc-swarnim-priority
+#
+#
+#
+#olympusLabels:
+#  olympusCluster: cluster
+#  olympusClusterBU: bu
+#  olympusClusterTeam: team-name
+#  olympusZone: zone-name
+#  olympusZoneEnv: zone-env

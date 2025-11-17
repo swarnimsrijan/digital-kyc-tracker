@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="5" status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%highlight{%d{HH:mm:ss} %-5p %-25.25c{1} %-8.8t  %-8.8X{flowID} - %m%n}" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- Your application's logger - keep this at TRACE level to see all your app logs -->
+        <Logger name="in.zeta" level="TRACE" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Add this logger for metrics -->
+        <Logger name="olympus.metrics" level="INFO" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Explicitly silence all framework packages -->
+        <Logger name="org.springframework" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.core" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.beans" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.context" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.scheduling.concurrent" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.web" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.jndi" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.jmx" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.util" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.springframework.boot" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="org.apache.catalina" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.loader" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.core" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.util" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.session" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.mapper" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.catalina.authenticator" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="org.apache.catalina.realm" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <Logger name="org.apache.tomcat" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.apache.tomcat.util" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.hibernate" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org.eclipse.jetty.jndi" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Additional common loggers that might be causing issues -->
+        <Logger name="org.apache" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Logger name="org" level="ERROR" additivity="false">
+            <AppenderRef ref="Console" />
+        </Logger>
+
+        <!-- Root logger - set to ERROR to limit all other logging -->
+        <Root level="INFO">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>
